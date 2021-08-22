@@ -4,11 +4,15 @@ import sys
 import re
 import requests
 import urllib.parse
+import time
 
 from bs4 import BeautifulSoup
 
 def get_wiki_data(url):
     html = requests.get(url)
+
+    time.sleep(1)
+    print('aaa')
     soup = BeautifulSoup(html.content, 'html.parser')
 
     return soup.select_one('.mw-parser-output').select_one('p').find_all('a', href=re.compile('(^/wiki/)'))
